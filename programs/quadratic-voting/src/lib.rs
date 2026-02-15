@@ -15,7 +15,16 @@ declare_id!("6gAb78mSb4GcHutMxcH4TWy6ffQXccKY2cWb9HyR3MPt");
 pub mod quadratic_voting {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        initialize::handler(ctx)
+    pub fn init_dao(ctx: Context<InitDao>, name: String) -> Result<()> {
+        ctx.accounts.handler(name, &ctx.bumps)
     }
+
+    pub fn init_proposal(ctx: Context<InitProposal>, metadata: String) -> Result<()> {
+        ctx.accounts.handler(metadata, &ctx.bumps)
+    }
+
+    pub fn cast_vote(ctx: Context<CastVote>, vote_type: u8) -> Result<()> {
+        ctx.accounts.cast_vote(vote_type, &ctx.bumps)
+    }
+
 }
